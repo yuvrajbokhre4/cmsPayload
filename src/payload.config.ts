@@ -1,6 +1,8 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 
+// import { visualEditor } from 'payload-visual-editor'
+// import 'payload-visual-editor/dist/styles.scss'
 import sharp from 'sharp' // sharp-import
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -30,6 +32,7 @@ export default buildConfig({
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
       beforeDashboard: ['@/components/BeforeDashboard'],
     },
+
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -63,11 +66,31 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
   collections: [Pages, Posts, Media, Categories, Users],
+
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
     ...plugins,
-    // storage-adapter-placeholder
+    // visualEditor({
+    //   previewUrl: () => `http://localhost:3001/pages/preview`,
+    //   previewWidthInPercentage: 60,
+    //   collections: {
+    //     pages: {
+    //       previewUrl: () => `http://localhost:3000/pages/preview`, // optional individual preview url for each collection
+    //     },
+    //     posts: {
+    //       previewUrl: () => `http://localhost:3000/posts/preview`, // optional individual preview url for each collection
+    //     },
+    //   },
+    //   globals: {
+    //     header: {
+    //       previewUrl: () => `http://localhost:3001/preview`, // optional individual preview url for each global
+    //     },
+    //     footer: {
+    //       previewUrl: () => `http://localhost:3001/preview`, // optional individual preview url for each global
+    //     },
+    //   },
+    // }),
   ],
   secret: process.env.PAYLOAD_SECRET,
   sharp,

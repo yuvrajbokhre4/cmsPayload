@@ -119,7 +119,7 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | DoubleImageBlock)[];
   meta?: {
     title?: string | null;
     image?: (string | null) | Media;
@@ -622,6 +622,19 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DoubleImageBlock".
+ */
+export interface DoubleImageBlock {
+  media1: string | Media;
+  media2: string | Media;
+  enableGutter?: boolean | null;
+  disableInnerContainer?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'doubleImageBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -875,6 +888,16 @@ export interface PagesSelect<T extends boolean = true> {
               form?: T;
               enableIntro?: T;
               introContent?: T;
+              id?: T;
+              blockName?: T;
+            };
+        doubleImageBlock?:
+          | T
+          | {
+              media1?: T;
+              media2?: T;
+              enableGutter?: T;
+              disableInnerContainer?: T;
               id?: T;
               blockName?: T;
             };

@@ -1,19 +1,19 @@
-import type { StaticImageData } from 'next/image';
-import { cn } from 'src/utilities/cn';
-import React from 'react';
-import RichText from '@/components/RichText';
-import { Media } from '../../components/Media';
-import type { DoubleImageBlock as DoubleImageBlockProps } from '@/payload-types';
+import type { StaticImageData } from 'next/image'
+import { cn } from 'src/utilities/cn'
+import React from 'react'
+import RichText from '@/components/RichText'
+import { Media } from '../../components/Media'
+import type { DoubleImageBlock as DoubleImageBlockProps } from '@/payload-types'
 
 type Props = DoubleImageBlockProps & {
-  captionClassName?: string;
-  className?: string;
-  enableGutter?: boolean;
-  imgClassName?: string;
-  staticImage1?: StaticImageData;
-  staticImage2?: StaticImageData;
-  disableInnerContainer?: boolean;
-};
+  captionClassName?: string
+  className?: string
+  enableGutter?: boolean
+  imgClassName?: string
+  staticImage1?: StaticImageData
+  staticImage2?: StaticImageData
+  disableInnerContainer?: boolean
+}
 
 export const MediaBlock: React.FC<Props> = (props) => {
   const {
@@ -26,10 +26,13 @@ export const MediaBlock: React.FC<Props> = (props) => {
     staticImage1,
     staticImage2,
     disableInnerContainer,
-  } = props;
+  } = props
 
-  const caption1 = media1?.caption;
-  const caption2 = media2?.caption;
+  let caption1
+  if (media1 && typeof media1 === 'object') caption1 = media1.caption
+  let caption2
+  if (media2 && typeof media2 === 'object') caption1 = media2.caption
+  // const caption2 = isMediaObject(media1) ? media2.caption : null
 
   return (
     <div
@@ -81,5 +84,5 @@ export const MediaBlock: React.FC<Props> = (props) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
